@@ -1,0 +1,25 @@
+{
+  "name": "api_hexagonal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev index.ts",
+    "tsc": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mysql2": "^3.8.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/signale": "^1.4.7",
+    "dotenv": "^16.4.0",
+    "signale": "^1.4.0",
+    "ts-node-dev": "^2.0.0"
+  }
+}
