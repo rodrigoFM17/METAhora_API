@@ -6,6 +6,6 @@ export class Goal {
         readonly title: string,
         readonly description: string,
         readonly state: string,
-        readonly end_date?: Date
+        readonly endDate?: Date
     ){}
 }
