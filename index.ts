@@ -5,13 +5,13 @@ const app = express()
 
 app.use(express.json())
 
-//drivers 
-import driverRouter from './src/Driver/infrastructure/driver.route'
-app.use('/drivers', driverRouter)
+//usuarios 
+import userRouter from "./src/User/infrastructure/User.route"
+app.use('/users', userRouter)
 
-//vehicules
-import vehiculeRouter from './src/Vehicule/infrastructure/vehicule.route'
-app.use('/vehicules', vehiculeRouter)
+//metas
+import goalRouter from './src/Goal/infrastructure/goal.route'
+app.use('/vehicules', goalRouter)
 
 
 const PORT = 3000

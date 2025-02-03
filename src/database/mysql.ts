@@ -6,7 +6,7 @@ dotenv.config()
 const signale = new Signale()
 
 const config = {
-    user: process.env.USER,
+    user: process.env.DB_USER,
     password: process.env.PASSWORD,
     host: process.env.HOST,
     database: process.env.DATABASE,

@@ -17,10 +17,10 @@ export class MySQLYUserRepository implements UserRepository {
         
     }
 
-    async register(email: string, password: string, nickname: string): Promise<User | null> {
+    async register(id:string, email: string, password: string, nickname: string): Promise<User | null> {
         try {
-            const sqlQuery = "s"
-            const [result]: any = await query(sqlQuery, [])
+            const sqlQuery = "insert into user (id, nickname, email, password, created_at) values (?, ?, ?, ?, ?)"
+            const [result]: any = await query(sqlQuery, [id, nickname, email, password, new Date()])
             return result
         } catch (e) {
             signale.error(e)

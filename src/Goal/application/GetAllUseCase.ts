@@ -1,3 +1,4 @@
+import signale from "signale";
 import { GoalRepository } from "../domain/Goal.repository";
 
 export class GetAllUseCase {

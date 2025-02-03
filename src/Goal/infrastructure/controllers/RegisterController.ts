@@ -7,9 +7,9 @@ export class RegisterController {
 
     async run(req: Request, res: Response) {
         try {
-            const {id, title, description, end_date} = req.body
+            const {title, description, end_date} = req.body
 
-            const registeredGoal = await this.registerUseCase.run(id, title, description, end_date)
+            const registeredGoal = await this.registerUseCase.run(title, description, end_date)
 
             if(registeredGoal) {
                 res.status(201).json({

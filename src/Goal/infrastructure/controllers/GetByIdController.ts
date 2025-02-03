@@ -6,20 +6,20 @@ export class GetByIdController {
 
     async run (req: Request, res: Response) {
         try {
-            const {goalId} = req.params
-            const goal = await this.getByIdUseCase.run(goalId)
+            const {id} = req.params
+            const goal = await this.getByIdUseCase.run(id)
 
             if (goal) {
                 res.status(200).json({
                     success: true,
                     data: goal,
-                    message: `meta con id ${goalId} obtenida correctamente`
+                    message: `meta con id ${id} obtenida correctamente`
                 })
             } else {
                 res.status(404).json({
                     success: false,
                     data: null,
-                    message: `no se pudo obtener la meta con el id ${goalId}`
+                    message: `no se pudo obtener la meta con el id ${id}`
                 })
             }
 
