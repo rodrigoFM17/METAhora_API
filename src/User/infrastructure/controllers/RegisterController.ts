@@ -8,7 +8,9 @@ export class RegisterController {
         try {  
             const {email, nickname, password} = req.body
 
+            console.log(email, nickname, password)
             const registeredUser = await this.registerUseCase.run(email, password, nickname)
+            console.log(registeredUser)
             if (registeredUser) {
                 res.status(201).json({
                     success: true,
