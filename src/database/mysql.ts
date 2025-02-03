@@ -16,6 +16,18 @@ const config = {
 
 const pool = mysql.createPool(config)
 
+async function testConnection() {
+    try {
+        const connection = await mysql.createConnection(config);
+        signale.success('Conexión exitosa a la base de datos');
+        await connection.end(); // Cierra la conexión
+    } catch (error: any) {
+        signale.error('Error en la conexión:', error.message);
+    }
+}
+
+testConnection();
+
 export async function query(sql: string, params: any[]) {
 
     try{

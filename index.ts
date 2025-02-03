@@ -11,7 +11,7 @@ app.use('/users', userRouter)
 
 //metas
 import goalRouter from './src/Goal/infrastructure/goal.route'
-app.use('/vehicules', goalRouter)
+app.use('/goals', goalRouter)
 
 
 const PORT = 3000
