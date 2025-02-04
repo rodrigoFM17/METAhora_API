@@ -7,7 +7,7 @@ export class MySQLYUserRepository implements UserRepository {
 
     async login(email: string, password: string): Promise<User | null> {
         try {
-            const sqlQuery = "select * from users where email = ? and password = ?"
+            const sqlQuery = "select * from user where email = ? and password = ?"
             const [result]: any = await query(sqlQuery, [email, password])
             return result
         } catch (e) {
