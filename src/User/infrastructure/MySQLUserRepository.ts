@@ -9,7 +9,7 @@ export class MySQLYUserRepository implements UserRepository {
         try {
             const sqlQuery = "select * from user where email = ? and password = ?"
             const [result]: any = await query(sqlQuery, [email, password])
-            return result
+            return result.length > 0 ? result : null
         } catch (e) {
             signale.error(e)
             return null
