@@ -27,10 +27,20 @@ export class MySQLYGoalRepository implements GoalRepository {
         }
     }
 
-    async registerNew(id: string, title: string, description: string, end_date?: Date): Promise<Goal | null> {
+    async registerNew(id:string, userId: string, title: string, description: string, points:number, isPublic: boolean, end_date?: Date): Promise<Goal | null> {
         try {
-            const sqlQuery = "s"
-            const [result]: any = await query(sqlQuery, [])
+
+            if (end_date) {
+                const sqlQuery = "insert into goal_date (goal_id, end_date) values (?, ?)"
+                await query(sqlQuery, [id, end_date])
+            }
+            
+            const sqlQuery = "insert into goal (id, user_id, title, description, points, state_id, public, created_at) values (?, ?, ?, ?, ?, ?, ?, ?)"
+            await query(sqlQuery, [id, userId, title, description, points, 2, isPublic, new Date()])
+            
+            const sqlQuery2 = "select * from goal where id = ?"
+            const [result] : any = await query(sqlQuery2, [id])
+
             return result
         } catch (e) {
             signale.error(e)

@@ -7,9 +7,9 @@ export class RegisterController {
 
     async run(req: Request, res: Response) {
         try {
-            const {title, description, end_date} = req.body
+            const {userId, title, description, end_date, points, isPublic} = req.body
 
-            const registeredGoal = await this.registerUseCase.run(title, description, end_date)
+            const registeredGoal = await this.registerUseCase.run(userId, title, description, points, isPublic, end_date)
 
             if(registeredGoal) {
                 res.status(201).json({
@@ -19,7 +19,7 @@ export class RegisterController {
                 })
             } else {
                 res.status(500).json({
-                    success: true,
+                    success: false,
                     data: null,
                     messsage: "ocurrio un error al intentar registrar la nueva meta"
                 })
