@@ -27,10 +27,11 @@ export class MySQLYGoalRepository implements GoalRepository {
         }
     }
 
-    async registerNew(id:string, userId: string, title: string, description: string, points:number, isPublic: boolean, end_date?: Date): Promise<Goal | null> {
+    async registerNew(id:string, userId: string, title: string, description: string, points:number = 0, isPublic: boolean = false, end_date?: Date): Promise<Goal | null> {
         try {
+            console.log(id, userId, title, description, points, isPublic, end_date)
 
-            if (end_date) {
+            if (end_date != undefined) {
                 const sqlQuery = "insert into goal_date (goal_id, end_date) values (?, ?)"
                 await query(sqlQuery, [id, end_date])
             }
