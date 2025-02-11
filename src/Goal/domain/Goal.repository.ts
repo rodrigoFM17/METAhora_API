@@ -12,4 +12,5 @@ export interface GoalRepository {
         isPublic: boolean,
         end_date?: Date
     ): Promise<Goal | null>
+    complete(id: Goal['id']): Promise<Goal | null>
 }

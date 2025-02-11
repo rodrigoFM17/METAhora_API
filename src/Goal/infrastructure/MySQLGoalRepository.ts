@@ -7,8 +7,9 @@ export class MySQLYGoalRepository implements GoalRepository {
 
     async getAll(user_id: string): Promise<Goal[] | null> {
         try {
-            const sqlQuery = "select * from goal where user_id = ?"
+            const sqlQuery = "select * from goal inner join state on goal.state_id = state.id where user_id = ?"
             const [result]: any = await query(sqlQuery, [user_id])
+            console.log(result)
             return result
         } catch (e) {
             signale.error(e)
@@ -42,7 +43,29 @@ export class MySQLYGoalRepository implements GoalRepository {
             const sqlQuery2 = "select * from goal where id = ?"
             const [result] : any = await query(sqlQuery2, [id])
 
-            return result
+            return result.length > 0 ? result : null
+        } catch (e) {
+            signale.error(e)
+            return null
+        }
+        
+    }
+
+    async complete(id: Goal["id"]): Promise<Goal | null> {
+        try {
+            console.log(id)
+
+            const sqlQuery1 = "select * from goal where id = ?"
+            const [goal] : any = await query(sqlQuery1, [id])
+            if (goal.length == 0) {
+                return null
+            }
+            
+            const sqlQuery = "update goal set state_id = ? where id = ? "
+            await query(sqlQuery, [1, id])
+            return goal
+
+            
         } catch (e) {
             signale.error(e)
             return null

@@ -1,3 +1,4 @@
+import { BcryptEncryptService } from "../../services/BcryptEncryptService";
 import { NodeCryptoUUIDService } from "../../services/NodeCryptoUUIDService";
 import { GetGoalsByUserIdUseCase } from "../application/GetGoalsByUserIdUseCase";
 import { LoginUseCase } from "../application/LoginUseCase";
@@ -9,10 +10,12 @@ import { MySQLYUserRepository } from "./MySQLUserRepository";
 
 const mySQLUserRepository = new MySQLYUserRepository()
 const nodeCryptoUUIDService = new NodeCryptoUUIDService()
-const registerUseCase = new RegisterUseCase(mySQLUserRepository, nodeCryptoUUIDService)
+const bcryptEncryptService = new BcryptEncryptService()
+
+const registerUseCase = new RegisterUseCase(mySQLUserRepository, nodeCryptoUUIDService, bcryptEncryptService)
 export const registerController = new RegisterController(registerUseCase)
 
-const loginUseCase = new LoginUseCase(mySQLUserRepository)
+const loginUseCase = new LoginUseCase(mySQLUserRepository, bcryptEncryptService)
 export const loginController = new LoginControllers(loginUseCase)
 
 const getGoalsByUserIdUseCase = new GetGoalsByUserIdUseCase(mySQLUserRepository)
