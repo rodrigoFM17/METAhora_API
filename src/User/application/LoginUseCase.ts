@@ -7,11 +7,11 @@ export class LoginUseCase {
 
     constructor( readonly userRepository: UserRepository, readonly encryptService: EncryptService){}
 
-    async run (email: string, password: string): Promise<User | null> {
+    async run (email: string, password: string): Promise<User[] | null> {
         try{
             const userLogged = await this.userRepository.login(email)
             if (userLogged && this.encryptService.verifyPassword(password, userLogged[0].password)) {
-                return userLogged[0]
+                return userLogged
             }
             return null
         } catch (e) {
