@@ -55,7 +55,7 @@ export class MySQLYGoalRepository implements GoalRepository {
         try {
             console.log(id)
 
-            const sqlQuery1 = "select * from goal where id = ?"
+            const sqlQuery1 = "select goal.id, goal.user_id, goal.title, goal.description, goal.points, state.text, goal.created_at, goal.updated_at, goal.public from goal inner join state on goal.state_id = state.id where goal.id = ?"
             const [goal] : any = await query(sqlQuery1, [id])
             if (goal.length == 0) {
                 return null

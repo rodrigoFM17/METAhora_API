@@ -32,7 +32,7 @@ export class MySQLYUserRepository implements UserRepository {
 
     async getGoalsByUserId(userId: string): Promise<Goal[] | null> {
         try {
-            const sqlQuery = "select * from goal inner join state on goal.state_id = state.id where user_id = ?"
+            const sqlQuery = "select goal.id, goal.user_id, goal.title, goal.description, goal.points, state.text, goal.created_at, goal.updated_at, goal.public from goal inner join state on goal.state_id = state.id where user_id = ?"
             const [result]: any = await query(sqlQuery, [userId])
             return result
         } catch (e) {
